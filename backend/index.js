@@ -20,3 +20,17 @@ db.connect(err => {
     if (err) throw err;
     console.log("✅ MySQL Connected...");
 });
+
+
+//Register API
+app.post("/register", async (req, res) => {
+    const { name, email, password } = req.body;
+    const hashedPasword = await bcrypt.hash(password, 10);
+
+    db.query("INSERT INTO users (name, email, password) VALUES (?, ?, ?)"),
+        [name, email, hashedPassword], (err, result) => {
+            if (err) return res.status(500).json({ message: "Email already exists" });
+            res.json({ message: "User registered successfully!" });
+        }
+    );
+});
