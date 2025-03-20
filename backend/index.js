@@ -15,3 +15,8 @@ const db = mysql.createConnection({
     password: "V@38080135k",
     database: "skillbridge"
 });
+
+db.connect(err => {
+    if (err) throw err;
+    console.log("✅ MySQL Connected...");
+});
